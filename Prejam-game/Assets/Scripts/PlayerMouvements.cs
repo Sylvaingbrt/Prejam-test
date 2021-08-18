@@ -36,7 +36,16 @@ public class PlayerMouvements : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        Vector2 newPos = rb.position + movement * moveSpeed * Time.fixedDeltaTime;
+        if (Mathf.Abs(newPos.x) > 8.5)
+        {
+            newPos.x = (float)((newPos.x > 0) ? 8.5 : -8.5);
+        }
+        if (Mathf.Abs(newPos.y) > 4.5)
+        {
+            newPos.y = (float)((newPos.y > 0) ?  4.5 : -4.5);
+        }
+        rb.MovePosition(newPos);
     }
 
 
